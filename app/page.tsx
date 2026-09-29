@@ -1,69 +1,89 @@
-import Image from "next/image";
+import Link from "next/link";
+import Hero from "./components/Hero";
+import HeroCrawler from "./components/HeroCrawler";
+import AudienceSection from "./components/AudienceSection";
+import CategorySection from "./components/CategorySection";
+import ProductGrid from "./components/ProductGrid";
 
-export default function Home() {
+async function fetchProducts() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/products?featured=true&limit=24`, { next: { revalidate: 60 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return Array.isArray(json.data) ? json.data : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function fetchCategories() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/categories`, { next: { revalidate: 60 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return Array.isArray(json.data) ? json.data : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+async function fetchCrawlerItems() {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1'}/crawler-items`, { next: { revalidate: 60 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return Array.isArray(json.data) ? json.data : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+export default async function Home() {
+  const [products, categories, crawlerItems] = await Promise.all([
+    fetchProducts(),
+    fetchCategories(),
+    fetchCrawlerItems()
+  ]);
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+    <div className="min-h-screen bg-ivory">
+      <div className="pb-24">
+        <Hero />
+        <HeroCrawler initialItems={crawlerItems} />
+        <AudienceSection />
+        <CategorySection categories={categories} />
+        <ProductGrid initialProducts={products} categories={categories} />
+        
+        {/* Builder Banner Section */}
+        <section className="mx-6 md:mx-12 my-24 bg-wine text-white p-12 md:p-24 rounded-sm flex flex-col md:flex-row justify-between items-center relative overflow-hidden" id="builder">
+          <div className="z-10 max-w-lg">
+            <p className="text-[#e9ba95] text-[10px] font-bold tracking-[0.2em] uppercase mb-6">The most personal gift</p>
+            <h2 className="font-serif text-5xl md:text-6xl leading-tight mb-6">
+              Your gift.<br />
+              <em className="font-medium not-italic text-white/90">Your way.</em>
+            </h2>
+            <p className="text-[#eadbd3] text-sm md:text-base leading-relaxed mb-10">
+              Choose a feeling, pick their favourites, add your words — and we'll make it beautiful.
+            </p>
+            <Link href="/builder" className="inline-block bg-white text-wine px-8 py-4 font-bold text-sm tracking-wide hover:bg-cream hover:-translate-y-1 transition-transform duration-300">
+              Build your gift <span>→</span>
+            </Link>
+          </div>
+          
+          <div className="relative w-full md:w-1/2 h-[300px] mt-12 md:mt-0 hidden md:block">
+             <div className="absolute top-4 right-1/4 w-[250px] h-[225px] bg-[#dec6a7] rotate-6 shadow-[inset_0_0_0_20px_#c4a986] p-8 font-serif text-wine flex flex-col items-center justify-center z-10 transition-transform duration-500 hover:rotate-0">
+               <span className="text-xl">for you</span>
+               <strong className="text-[80px] leading-none mt-2">♡</strong>
+             </div>
+             <div className="absolute top-0 left-10 bg-white text-ink text-[10px] uppercase font-bold tracking-wider px-6 py-4 shadow-xl z-20">
+               choose a theme
+             </div>
+             <div className="absolute bottom-10 right-0 bg-white text-ink text-[10px] uppercase font-bold tracking-wider px-6 py-4 shadow-xl z-20">
+               add a little love
+             </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

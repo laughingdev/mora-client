@@ -1,26 +1,347 @@
+/* ==========================================================================
+   GLOBAL FONT CONFIGURATION
+   --------------------------------------------------------------------------
+   To change fonts for the entire website:
+   1. Update the Google Fonts @import url below (or add any custom font url).
+   2. Change --font-sans for body, text, buttons, UI, inputs, and navigation.
+   3. Change --font-serif for headings, luxury titles, hero banners, and prices.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Primary Font: Body text, UI elements, buttons, navigation, forms */
+  --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+
+  /* Editorial & Heading Font: Luxury titles, section headers, badges, prices */
+  --font-serif: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@theme {
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+
+  --color-ivory: #fffaf4;
+  --color-cream: #f5eadf;
+  --color-blush: #f2dfe0;
+  --color-wine: #6b2939;
+  --color-ink: #282323;
+  --color-muted: #786d6a;
+  --color-gold: #bb9657;
+  --color-line: #e9ddd3;
+  --color-wine-dark: #4f1d2a;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html,
+  body {
+    background-color: var(--color-ivory);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    scroll-behavior: smooth;
+  }
+
+  .font-sans {
+    font-family: var(--font-sans);
+  }
+
+  .font-serif {
+    font-family: var(--font-serif);
+  }
+
+  button,
+  [role="button"],
+  a,
+  select,
+  summary,
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="checkbox"],
+  input[type="radio"],
+  label[for],
+  [role="tab"] {
+    cursor: pointer;
+  }
+
+  button:disabled,
+  [role="button"][aria-disabled="true"],
+  input:disabled,
+  select:disabled {
+    cursor: not-allowed !important;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* Ensure all buttons, tabs, and interactive elements have cursor pointer across application */
+button,
+[role="button"],
+[role="tab"] {
+  cursor: pointer;
+}
+
+@layer utilities {
+  .glass {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .glass-dark {
+    background: rgba(23, 19, 22, 0.45);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+}
+
+@keyframes crawler {
+  0% {
+    transform: translateX(0%);
+  }
+
+  100% {
+    transform: translateX(-33.333333%);
+  }
+}
+
+.animate-crawler {
+  animation: crawler linear infinite;
+}
+
+.no-scrollbar::-webkit-scrollbar,
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar,
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   Editorial Blog Typography
+   ========================================================================== */
+.blog-prose {
+  color: var(--color-ink);
+  line-height: 1.85;
+  font-size: 1.0625rem;
+}
+
+.blog-prose p {
+  margin-bottom: 1.5rem;
+  color: #3b3534;
+  font-size: 1.0625rem;
+  line-height: 1.85;
+}
+
+.blog-prose p.lead,
+.blog-prose .lead {
+  font-size: 1.25rem;
+  line-height: 1.75;
+  color: var(--color-wine);
+  font-family: var(--font-serif);
+  font-style: italic;
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.blog-prose h1,
+.blog-prose h2,
+.blog-prose h3,
+.blog-prose h4 {
+  font-family: var(--font-serif);
+  color: var(--color-ink);
+  letter-spacing: -0.01em;
+}
+
+.blog-prose h1 {
+  font-size: 2.25rem;
+  line-height: 1.3;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  font-weight: 600;
+}
+
+.blog-prose h2 {
+  font-size: 1.75rem;
+  line-height: 1.35;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.blog-prose h3 {
+  font-size: 1.35rem;
+  line-height: 1.4;
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  font-weight: 600;
+}
+
+.blog-prose blockquote {
+  border-left: 3px solid var(--color-wine);
+  padding: 1.25rem 1.75rem;
+  margin: 2rem 0;
+  background-color: #faf5f0;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--color-wine);
+  line-height: 1.7;
+}
+
+.blog-prose ul {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.blog-prose ol {
+  list-style-type: decimal;
+  padding-left: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.blog-prose li {
+  margin-bottom: 0.5rem;
+  color: #3b3534;
+  line-height: 1.75;
+}
+
+.blog-prose img {
+  border-radius: 1rem;
+  margin: 2.25rem 0;
+  box-shadow: 0 10px 30px -5px rgba(40, 35, 35, 0.08);
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--color-line);
+}
+
+.blog-prose a {
+  color: var(--color-wine);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.blog-prose a:hover {
+  color: var(--color-wine-dark);
+}
+
+/* ==========================================================================
+   CMS & LEGAL PAGES CONTENT STYLES
+   ========================================================================== */
+.cms-content .lead {
+  font-size: 1.125rem;
+  color: #4f1d2a;
+  line-height: 1.75;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-line);
+  font-weight: 450;
+}
+
+.cms-content h2 {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  color: var(--color-wine);
+  margin-top: 2.25rem;
+  margin-bottom: 0.85rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.cms-content h3 {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  color: var(--color-ink);
+  margin-top: 1.75rem;
+  margin-bottom: 0.65rem;
+  font-weight: 600;
+}
+
+.cms-content p {
+  margin-bottom: 1.15rem;
+  line-height: 1.75;
+}
+
+.cms-content ul {
+  list-style-type: none;
+  margin-bottom: 1.5rem;
+  padding-left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.cms-content ul li {
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.65;
+}
+
+.cms-content ul li::before {
+  content: "•";
+  position: absolute;
+  left: 0.25rem;
+  color: var(--color-gold);
+  font-size: 1.35rem;
+  line-height: 1;
+  top: 0.1rem;
+}
+
+.cms-content a {
+  color: var(--color-wine);
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+
+.cms-content a:hover {
+  color: var(--color-gold);
+}
+
+.cms-content strong {
+  color: var(--color-ink);
+  font-weight: 600;
+}
+
+.cms-content .table-container {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border-radius: 0.5rem;
+  border: 1px solid var(--color-line);
+}
+
+.cms-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+.cms-content th {
+  background-color: var(--color-cream);
+  color: var(--color-wine);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid var(--color-line);
+}
+
+.cms-content td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--color-line);
+  color: var(--color-ink);
+}
+
+.cms-content tr:last-child td {
+  border-bottom: none;
 }

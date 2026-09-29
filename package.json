@@ -10,9 +10,15 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "axios": "^1.20.0",
+    "framer-motion": "^13.4.2",
+    "lucide-react": "^1.47.0",
     "next": "16.3.6",
     "react": "19.2.8",
-    "react-dom": "19.2.8"
+    "react-dom": "19.2.8",
+    "sonner": "^2.0.8",
+    "swr": "^2.5.1",
+    "zustand": "^5.0.15"
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.2",
