@@ -10,6 +10,7 @@
     "format": "biome format --write"
   },
   "dependencies": {
+    "@lottiefiles/dotlottie-react": "^0.19.16",
     "axios": "^1.20.0",
     "framer-motion": "^13.4.2",
     "lucide-react": "^1.47.0",

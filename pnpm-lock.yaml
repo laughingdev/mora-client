@@ -8,9 +8,12 @@ importers:
 
   .:
     dependencies:
+      '@lottiefiles/dotlottie-react':
+        specifier: ^0.19.16
+        version: 0.19.16(react@19.2.8)
       axios:
         specifier: ^1.20.0
-        version: 1.20.0
+        version: 1.20.0(debug@4.4.3)
       framer-motion:
         specifier: ^13.4.2
         version: 13.4.2(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
@@ -316,6 +319,16 @@ packages:
 
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
+
+  '@lottiefiles/dotlottie-react@0.19.16':
+    resolution: {integrity: sha512-kf+v6tGn726XoAw6wAZb9JgVko6j+d6ppbBfe4vHlp3fjqmXoSfJt2bvxRMc6yG75c/atg8/H1uRmsViEESEeQ==}
+    engines: {node: '>=18.17.0', npm: '>=9.5.0'}
+    peerDependencies:
+      react: ^17 || ^18 || ^19
+
+  '@lottiefiles/dotlottie-web@0.80.0':
+    resolution: {integrity: sha512-M00APgOJfP6xPZ3kAzZAUNATxluFiMU0wD3asp6HQSXDX8qLzSDh/Jmqbo0H7+WcqfpQkN8WYBu3aOzm2y/b4g==}
+    engines: {node: '>=18.17.0', npm: '>=9.5.0'}
 
   '@next/env@16.3.6':
     resolution: {integrity: sha512-x9Vblze1EbtltQYnNH38xCPWU3TVfBd1eXqA3+w9+BTpedkkdNpAaltXlGQ/nsc1+E0mVTNrtcbX3GoO09zeLQ==}
@@ -1042,6 +1055,13 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
+  '@lottiefiles/dotlottie-react@0.19.16(react@19.2.8)':
+    dependencies:
+      '@lottiefiles/dotlottie-web': 0.80.0
+      react: 19.2.8
+
+  '@lottiefiles/dotlottie-web@0.80.0': {}
+
   '@next/env@16.3.6': {}
 
   '@next/swc-darwin-arm64@16.3.6':
@@ -1161,9 +1181,9 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  axios@1.20.0:
+  axios@1.20.0(debug@4.4.3):
     dependencies:
-      follow-redirects: 1.16.0
+      follow-redirects: 1.16.0(debug@4.4.3)
       form-data: 4.0.6
       https-proxy-agent: 5.0.1
       proxy-from-env: 2.1.0
@@ -1228,7 +1248,9 @@ snapshots:
       has-tostringtag: 1.0.2
       hasown: 2.0.4
 
-  follow-redirects@1.16.0: {}
+  follow-redirects@1.16.0(debug@4.4.3):
+    optionalDependencies:
+      debug: 4.4.3
 
   form-data@4.0.6:
     dependencies:

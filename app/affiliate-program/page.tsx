@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 // Default Google Form link for Mora Moments Affiliate application
 const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuNkL7n0w8j21S3_mBd1RHTJBvzIJWWSLkaJ2j2RkpY0FLZQ/viewform";
-const DIRECT_FORM_URL = "https://moramoments.com/pages/affiliate-program";
+const DIRECT_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfuNkL7n0w8j21S3_mBd1RHTJBvzIJWWSLkaJ2j2RkpY0FLZQ/viewform";
 
 export default function AffiliateProgramPage() {
   return (
@@ -19,7 +19,7 @@ export default function AffiliateProgramPage() {
         <div className="container mx-auto max-w-5xl">
           <nav className="flex items-center gap-2 text-[11px] uppercase tracking-widest text-muted mb-6">
             <Link href="/" className="hover:text-wine transition-colors">Home</Link>
-            <ChevronRight size={12} className="text-muted/60" />
+            <ChevronRight size={12} className="text-  muted/60" />
             <span className="text-wine font-semibold">Affiliate Program</span>
           </nav>
 
@@ -40,38 +40,6 @@ export default function AffiliateProgramPage() {
 
       {/* Program Benefits Grid */}
       <section className="container mx-auto max-w-5xl px-6 md:px-12 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16">
-          <div className="bg-white border border-line p-6 rounded-xl shadow-xs flex flex-col items-start">
-            <div className="w-12 h-12 rounded-full bg-wine/10 flex items-center justify-center text-wine mb-4">
-              <DollarSign size={22} />
-            </div>
-            <h3 className="font-serif text-lg text-ink mb-2">Generous Commissions</h3>
-            <p className="text-xs text-muted leading-relaxed">
-              Earn competitive commission rates on every completed purchase made through your custom affiliate links.
-            </p>
-          </div>
-
-          <div className="bg-white border border-line p-6 rounded-xl shadow-xs flex flex-col items-start">
-            <div className="w-12 h-12 rounded-full bg-wine/10 flex items-center justify-center text-wine mb-4">
-              <Gift size={22} />
-            </div>
-            <h3 className="font-serif text-lg text-ink mb-2">Exclusive Gifting Perks</h3>
-            <p className="text-xs text-muted leading-relaxed">
-              Top creators receive complimentary gift hampers, early sample drops, and custom discount codes for their followers.
-            </p>
-          </div>
-
-          <div className="bg-white border border-line p-6 rounded-xl shadow-xs flex flex-col items-start">
-            <div className="w-12 h-12 rounded-full bg-wine/10 flex items-center justify-center text-wine mb-4">
-              <Award size={22} />
-            </div>
-            <h3 className="font-serif text-lg text-ink mb-2">Real-Time Tracking</h3>
-            <p className="text-xs text-muted leading-relaxed">
-              Access a transparent partner dashboard with live click metrics, sales attribution, and monthly payouts.
-            </p>
-          </div>
-        </div>
-
         {/* Embedded Google Form Section */}
         <div className="bg-white border border-line rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.04)] overflow-hidden">
           <div className="bg-wine text-white p-6 md:p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
