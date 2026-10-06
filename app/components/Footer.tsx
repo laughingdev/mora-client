@@ -74,9 +74,28 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
               </button>
             </form>
 
-            <div className="flex gap-4">
-              <a href="https://www.instagram.com/mora_moments/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#674a4f] flex items-center justify-center hover:bg-wine hover:border-wine transition-colors">
+            <div className="flex flex-wrap items-center gap-4">
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/mora_moments/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Follow us on Instagram @mora_moments"
+                className="w-10 h-10 rounded-full border border-[#674a4f] flex items-center justify-center hover:bg-wine hover:border-wine transition-colors text-[#e7cfc4] hover:text-white"
+              >
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
+              </a>
+
+              {/* WhatsApp */}
+              <a
+                href="https://wa.me/918696333360"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Chat on WhatsApp: +91 8696333360"
+                className="flex items-center gap-2 px-3 py-2 rounded-full border border-[#674a4f] hover:bg-[#25D366] hover:border-[#25D366] transition-colors text-[#e7cfc4] hover:text-white text-xs font-semibold group"
+              >
+                <MessageCircle size={18} className="text-[#25D366] group-hover:text-white transition-colors" />
+                <span>+91 8696333360</span>
               </a>
             </div>
           </div>
