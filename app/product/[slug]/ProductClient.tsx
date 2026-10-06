@@ -431,7 +431,7 @@ export default function ProductClient({
   };
 
   return (
-    <div className="container mx-auto px-6 md:px-12 max-w-7xl overflow-x-clip">
+    <div className="container mx-auto px-4 sm:px-6 md:px-12 max-w-7xl overflow-x-clip pb-20 sm:pb-0">
       {/* Breadcrumbs */}
       <div className="text-[10px] uppercase tracking-widest text-muted mb-8 font-medium">
         <span className="hover:text-wine cursor-pointer" onClick={() => router.push('/')}>Home</span>
@@ -663,50 +663,74 @@ export default function ProductClient({
           {/* Action Row: Quantity + Add to Bag + Buy Now + Wishlist */}
           <div className="space-y-3 mb-6">
             <div className="flex flex-col sm:flex-row gap-3">
-              {/* Quantity Selector */}
-              <div className="flex items-center border border-line rounded-xl h-14 w-full sm:w-32 bg-white px-2 shrink-0 shadow-sm">
-                <button 
+              {/* Mobile Utility Row: Quantity Selector + Wishlist */}
+              <div className="flex items-center gap-3 sm:contents">
+                {/* Quantity Selector */}
+                <div className="flex-1 sm:flex-initial flex items-center border border-line rounded-xl h-13 sm:h-14 sm:w-32 bg-white px-2 shrink-0 shadow-xs">
+                  <button 
+                    type="button"
+                    onClick={() => setQuantity(q => Math.max(1, q - 1))}
+                    className="w-10 h-full flex items-center justify-center text-muted hover:text-wine transition-colors disabled:opacity-30"
+                    disabled={quantity <= 1}
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <span className="flex-1 text-center font-bold text-ink text-sm">{quantity}</span>
+                  <button 
+                    type="button"
+                    onClick={() => setQuantity(q => Math.min(currentStock, q + 1))}
+                    className="w-10 h-full flex items-center justify-center text-muted hover:text-wine transition-colors disabled:opacity-30"
+                    disabled={quantity >= currentStock}
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+
+                {/* Wishlist Button (Mobile Placement) */}
+                <button
                   type="button"
-                  onClick={() => setQuantity(q => Math.max(1, q - 1))}
-                  className="w-10 h-full flex items-center justify-center text-muted hover:text-wine transition-colors disabled:opacity-30"
-                  disabled={quantity <= 1}
+                  onClick={() =>
+                    addToWishlist({
+                      id: product.id,
+                      name: product.name,
+                      price: currentPrice,
+                      originalPrice: selectedOption.originalPrice,
+                      image: currentImages[0] || '/placeholder.jpg',
+                    })
+                  }
+                  className="sm:hidden w-13 h-13 border border-line rounded-xl flex items-center justify-center text-wine hover:bg-cream transition-colors bg-white shrink-0 shadow-xs active:scale-95"
+                  title="Save to Wishlist"
                 >
-                  <Minus size={16} />
-                </button>
-                <span className="flex-1 text-center font-semibold text-ink">{quantity}</span>
-                <button 
-                  type="button"
-                  onClick={() => setQuantity(q => Math.min(currentStock, q + 1))}
-                  className="w-10 h-full flex items-center justify-center text-muted hover:text-wine transition-colors disabled:opacity-30"
-                  disabled={quantity >= currentStock}
-                >
-                  <Plus size={16} />
+                  <Heart size={20} fill={wishlist.find(i => i.id === product.id) ? "currentColor" : "none"} />
                 </button>
               </div>
 
-              {/* Add to Bag Button */}
-              <button
-                type="button"
-                onClick={handleAddToCart}
-                disabled={currentStock === 0}
-                className="flex-1 border-2 border-wine text-wine hover:bg-wine hover:text-white rounded-xl h-14 text-xs font-bold tracking-widest uppercase transition-all shadow-sm flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <ShoppingBag size={18} />
-                <span>{currentStock === 0 ? "Out of Stock" : "Add to Bag"}</span>
-              </button>
+              {/* Add to Bag + Buy Now Dual CTA Grid */}
+              <div className="grid grid-cols-2 gap-3 flex-1">
+                {/* Add to Bag Button */}
+                <button
+                  type="button"
+                  onClick={handleAddToCart}
+                  disabled={currentStock === 0}
+                  className="w-full border-2 border-wine bg-wine/5 hover:bg-wine text-wine hover:text-white rounded-xl h-13 sm:h-14 text-[11px] sm:text-xs font-extrabold tracking-wider uppercase transition-all shadow-xs hover:shadow-md flex items-center justify-center gap-1.5 sm:gap-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+                >
+                  <ShoppingBag size={16} className="shrink-0" />
+                  <span className="truncate">{currentStock === 0 ? "Out of Stock" : "Add to Bag"}</span>
+                </button>
 
-              {/* Direct Buy Now Button */}
-              <button
-                type="button"
-                onClick={handleBuyNow}
-                disabled={currentStock === 0}
-                className="flex-1 bg-wine text-white hover:bg-wine-dark rounded-xl h-14 text-xs font-bold tracking-widest uppercase transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                <Zap size={18} />
-                <span>Buy Now</span>
-              </button>
+                {/* Direct Buy Now Button */}
+                <button
+                  type="button"
+                  onClick={handleBuyNow}
+                  disabled={currentStock === 0}
+                  className="w-full bg-gradient-to-r from-wine via-[#674a4f] to-[#4a2e33] text-white hover:opacity-95 rounded-xl h-13 sm:h-14 text-[11px] sm:text-xs font-extrabold tracking-wider uppercase transition-all shadow-md shadow-wine/20 hover:shadow-lg flex items-center justify-center gap-1.5 sm:gap-2 disabled:opacity-50 disabled:cursor-not-allowed active:scale-[0.98]"
+                >
+                  <Zap size={16} className="shrink-0 fill-amber-300 text-amber-300" />
+                  <span className="truncate">Buy Now</span>
+                </button>
+              </div>
 
-              {/* Wishlist Button */}
+              {/* Wishlist Button (Desktop Placement) */}
               <button
                 type="button"
                 onClick={() =>
@@ -718,7 +742,7 @@ export default function ProductClient({
                     image: currentImages[0] || '/placeholder.jpg',
                   })
                 }
-                className="w-14 h-14 border border-line rounded-xl flex items-center justify-center text-wine hover:bg-cream transition-colors bg-white shrink-0 shadow-sm"
+                className="hidden sm:flex w-14 h-14 border border-line rounded-xl items-center justify-center text-wine hover:bg-cream transition-colors bg-white shrink-0 shadow-xs active:scale-95"
                 title="Save to Wishlist"
               >
                 <Heart size={20} fill={wishlist.find(i => i.id === product.id) ? "currentColor" : "none"} />
@@ -1000,6 +1024,35 @@ export default function ProductClient({
           </div>
         </section>
       )}
+
+      {/* Sticky Mobile Bottom Quick-Action Dock */}
+      <div className="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-line/80 px-3.5 py-2.5 shadow-[0_-8px_25px_rgba(0,0,0,0.12)] flex items-center justify-between gap-3">
+        <div className="flex flex-col pl-1 shrink-0 max-w-[120px]">
+          <span className="text-[10px] uppercase font-bold text-muted truncate">{product.name}</span>
+          <span className="text-sm font-extrabold text-wine">₹{currentPrice.toLocaleString('en-IN')}</span>
+        </div>
+
+        <div className="grid grid-cols-2 gap-2 flex-1">
+          <button
+            type="button"
+            onClick={handleAddToCart}
+            disabled={currentStock === 0}
+            className="w-full border-2 border-wine bg-wine/5 text-wine hover:bg-wine hover:text-white rounded-lg h-11 text-[11px] font-extrabold uppercase tracking-wider flex items-center justify-center gap-1 active:scale-[0.97] transition-all disabled:opacity-50"
+          >
+            <ShoppingBag size={14} className="shrink-0" />
+            <span className="truncate">{currentStock === 0 ? "Out" : "Add to Bag"}</span>
+          </button>
+          <button
+            type="button"
+            onClick={handleBuyNow}
+            disabled={currentStock === 0}
+            className="w-full bg-gradient-to-r from-wine to-[#4a2e33] text-white rounded-lg h-11 text-[11px] font-extrabold uppercase tracking-wider flex items-center justify-center gap-1 shadow-sm active:scale-[0.97] transition-all disabled:opacity-50"
+          >
+            <Zap size={14} className="shrink-0 fill-amber-300 text-amber-300" />
+            <span className="truncate">Buy Now</span>
+          </button>
+        </div>
+      </div>
     </div>
   );
 }
