@@ -64,8 +64,8 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
                 disabled={submitting}
                 className="bg-transparent text-sm w-full outline-none placeholder:text-[#e7cfc4]/50 text-white"
               />
-              <button 
-                type="submit" 
+              <button
+                type="submit"
                 disabled={submitting}
                 className="text-[#dfb18e] hover:text-white transition-colors p-1 disabled:opacity-50"
                 aria-label="Subscribe"
@@ -77,9 +77,6 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
             <div className="flex gap-4">
               <a href="https://www.instagram.com/mora_moments/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#674a4f] flex items-center justify-center hover:bg-wine hover:border-wine transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
-              </a>
-              <a href="https://wa.me/919876543210" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full border border-[#674a4f] flex items-center justify-center hover:bg-wine hover:border-wine transition-colors">
-                <MessageCircle size={18} />
               </a>
             </div>
           </div>
@@ -106,9 +103,9 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
           <div>
             <h4 className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#dfb18e] mb-6">Reviews and deals</h4>
             <div className="flex flex-col gap-4 text-xs text-[#e7cfc4] mb-8">
-              <Link href="/shop" className="hover:text-white transition-colors">Offers and deals</Link>
-              <Link href="/shop" className="hover:text-white transition-colors">Gifts under ₹999</Link>
-              <Link href="/shop" className="hover:text-white transition-colors">Gift inspiration</Link>
+              <Link href="/shop?featured=true" className="hover:text-white transition-colors">Offers and deals</Link>
+              <Link href="/shop?maxPrice=999" className="hover:text-white transition-colors">Gifts under ₹999</Link>
+              <Link href="/blog" className="hover:text-white transition-colors">Gift inspiration</Link>
             </div>
             <h4 className="text-[10px] font-bold tracking-[0.15em] uppercase text-[#dfb18e] mb-6 pt-6 border-t border-[#674a4f]">Shop by occasion</h4>
             <div className="flex flex-col gap-4 text-xs text-[#e7cfc4]">
