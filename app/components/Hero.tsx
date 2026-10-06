@@ -7,12 +7,15 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-[70vh] lg:min-h-[640px] flex items-center overflow-hidden bg-ivory py-12 md:py-16">
-      {/* Background with subtle gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/95 to-transparent z-10 w-full lg:w-3/5" />
+      {/* Background with subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-ivory/98 via-ivory/90 to-ivory/40 lg:bg-gradient-to-r lg:from-ivory lg:via-ivory/95 lg:to-transparent z-10 w-full lg:w-3/5 pointer-events-none" />
+
+      {/* Additional mobile-specific readability gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/95 via-70% to-ivory/30 lg:hidden z-10 pointer-events-none" />
 
       {/* Background image */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-[42%_center] lg:bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-[65%_center] lg:bg-center"
         style={{ backgroundImage: 'url("/hero-gift.png")' }}
       >
         <div className="absolute inset-0 bg-black/5 lg:bg-black/0" />
@@ -32,14 +35,16 @@ export default function Hero() {
               Thoughtfully made • Beautifully remembered
             </p>
 
-            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-[1.08] tracking-tight mb-5">
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-[70px] leading-[1.08] tracking-tight mb-5 text-ink">
               More than gifts,<br />
               <em className="text-wine font-medium not-italic">we create memories.</em>
             </h1>
 
-            <p className="text-muted text-base md:text-lg leading-relaxed max-w-md mb-8">
-              Discover curated gift hampers and personalized surprises designed to make every special moment unforgettable.
-            </p>
+            <div className="bg-ivory/80 sm:bg-transparent backdrop-blur-xs p-3.5 sm:p-0 rounded-2xl border border-line/40 sm:border-0 mb-8 max-w-md shadow-xs sm:shadow-none">
+              <p className="text-ink font-medium text-base md:text-lg leading-relaxed">
+                Discover curated gift hampers and personalized surprises designed to make every special moment unforgettable.
+              </p>
+            </div>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link
