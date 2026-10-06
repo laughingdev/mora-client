@@ -7,17 +7,14 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-[70vh] lg:min-h-[640px] flex items-center overflow-hidden bg-ivory py-12 md:py-16">
-      {/* Background image positioned gracefully on the right */}
+      {/* Background with subtle gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/80 to-transparent z-10 w-full lg:w-3/5 pointer-events-none" />
+
+      {/* Background image */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-[85%_center] lg:bg-center"
         style={{ backgroundImage: 'url("/hero-gift.png")' }}
-      >
-        <div className="absolute inset-0 bg-black/5 lg:bg-black/0" />
-      </div>
-
-      {/* Seamless luxury gradient overlays: Pure ivory behind text, fading gracefully to reveal gift photo */}
-      <div className="absolute inset-0 z-10 bg-gradient-to-r from-ivory via-ivory via-[65%] sm:via-[55%] to-ivory/20 lg:to-transparent pointer-events-none" />
-      <div className="absolute inset-0 z-10 bg-gradient-to-b from-ivory via-ivory/90 via-[75%] to-transparent lg:hidden pointer-events-none" />
+      />
 
       <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-8">
 
@@ -38,7 +35,7 @@ export default function Hero() {
               <em className="text-wine font-medium not-italic">we create memories.</em>
             </h1>
 
-            <p className="text-ink/85 font-medium text-base md:text-lg leading-relaxed max-w-md mb-8">
+            <p className="text-ink font-semibold text-base md:text-lg leading-relaxed max-w-md mb-8 drop-shadow-[0_1px_2px_rgba(255,255,255,0.8)]">
               Discover curated gift hampers and personalized surprises designed to make every special moment unforgettable.
             </p>
 
