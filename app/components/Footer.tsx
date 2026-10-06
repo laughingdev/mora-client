@@ -74,7 +74,7 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
               </button>
             </form>
 
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex gap-4">
               {/* Instagram */}
               <a
                 href="https://www.instagram.com/mora_moments/"
@@ -91,11 +91,13 @@ export default function Footer({ categories = [], pages = [] }: FooterProps) {
                 href="https://wa.me/918696333360"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Chat on WhatsApp: +91 8696333360"
-                className="flex items-center gap-2 px-3 py-2 rounded-full border border-[#674a4f] hover:bg-[#25D366] hover:border-[#25D366] transition-colors text-[#e7cfc4] hover:text-white text-xs font-semibold group"
+                title="Chat with us on WhatsApp"
+                className="w-10 h-10 rounded-full border border-[#674a4f] flex items-center justify-center hover:bg-[#25D366] hover:border-[#25D366] transition-colors text-[#e7cfc4] hover:text-white"
               >
-                <MessageCircle size={18} className="text-[#25D366] group-hover:text-white transition-colors" />
-                <span>+91 8696333360</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414-.074-.124-.272-.198-.57-.347z"/>
+                  <path d="M12 2a10 10 0 0 0-8.513 15.242L2 22l4.898-1.436A10 10 0 1 0 12 2zm0 18a7.95 7.95 0 0 1-4.068-1.117l-.292-.174-2.898.85.864-2.83-.191-.304A7.957 7.957 0 1 1 12 20z"/>
+                </svg>
               </a>
             </div>
           </div>
