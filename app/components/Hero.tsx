@@ -7,19 +7,17 @@ import { ArrowRight, ArrowUpRight } from "lucide-react";
 export default function Hero() {
   return (
     <section className="relative min-h-[70vh] lg:min-h-[640px] flex items-center overflow-hidden bg-ivory py-12 md:py-16">
-      {/* Background with subtle gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-ivory/98 via-ivory/90 to-ivory/40 lg:bg-gradient-to-r lg:from-ivory lg:via-ivory/95 lg:to-transparent z-10 w-full lg:w-3/5 pointer-events-none" />
-
-      {/* Additional mobile-specific readability gradient */}
-      <div className="absolute inset-0 bg-gradient-to-r from-ivory via-ivory/95 via-70% to-ivory/30 lg:hidden z-10 pointer-events-none" />
-
-      {/* Background image */}
+      {/* Background image positioned gracefully on the right */}
       <div
-        className="absolute inset-0 z-0 bg-cover bg-[65%_center] lg:bg-center"
+        className="absolute inset-0 z-0 bg-cover bg-[85%_center] lg:bg-center"
         style={{ backgroundImage: 'url("/hero-gift.png")' }}
       >
         <div className="absolute inset-0 bg-black/5 lg:bg-black/0" />
       </div>
+
+      {/* Seamless luxury gradient overlays: Pure ivory behind text, fading gracefully to reveal gift photo */}
+      <div className="absolute inset-0 z-10 bg-gradient-to-r from-ivory via-ivory via-[65%] sm:via-[55%] to-ivory/20 lg:to-transparent pointer-events-none" />
+      <div className="absolute inset-0 z-10 bg-gradient-to-b from-ivory via-ivory/90 via-[75%] to-transparent lg:hidden pointer-events-none" />
 
       <div className="container mx-auto px-6 md:px-12 relative z-20 flex flex-col lg:flex-row items-center gap-8 lg:gap-8">
 
@@ -40,11 +38,9 @@ export default function Hero() {
               <em className="text-wine font-medium not-italic">we create memories.</em>
             </h1>
 
-            <div className="bg-ivory/80 sm:bg-transparent backdrop-blur-xs p-3.5 sm:p-0 rounded-2xl border border-line/40 sm:border-0 mb-8 max-w-md shadow-xs sm:shadow-none">
-              <p className="text-ink font-medium text-base md:text-lg leading-relaxed">
-                Discover curated gift hampers and personalized surprises designed to make every special moment unforgettable.
-              </p>
-            </div>
+            <p className="text-ink/85 font-medium text-base md:text-lg leading-relaxed max-w-md mb-8">
+              Discover curated gift hampers and personalized surprises designed to make every special moment unforgettable.
+            </p>
 
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link
