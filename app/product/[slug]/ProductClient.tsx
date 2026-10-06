@@ -787,9 +787,218 @@ export default function ProductClient({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
-                className="prose max-w-none text-ink/80 text-sm md:text-base leading-relaxed"
+                className="space-y-12"
               >
-                <div dangerouslySetInnerHTML={{ __html: product.description.replace(/\n/g, '<br/>') }} />
+                {/* Dual Column Layout: Details on Left, Customer Reviews Automatically Next to it on Desktop / Scroll on Mobile */}
+                <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start">
+                  {/* Details Column */}
+                  <div className="lg:col-span-6 space-y-8">
+                    <div>
+                      <h3 className="font-serif text-2xl text-wine mb-4">Product Details & Craftsmanship</h3>
+                      <div
+                        className="prose max-w-none text-ink/80 text-sm md:text-base leading-relaxed"
+                        dangerouslySetInnerHTML={{ __html: product.description.replace(/\n/g, '<br/>') }}
+                      />
+                    </div>
+
+                    <div className="pt-6 border-t border-line">
+                      <h4 className="text-xs font-bold tracking-widest uppercase text-wine mb-4">Shipping & Returns Overview</h4>
+                      <div className="text-sm text-muted leading-relaxed space-y-5 bg-cream/30 p-6 rounded-2xl border border-line">
+                        <div>
+                          <h4 className="text-ink font-bold mb-1 flex items-center gap-2">
+                            <Truck size={16} className="text-wine shrink-0" />
+                            <span>Insured Shipping</span>
+                          </h4>
+                          <p className="text-xs sm:text-sm">All our gifts are packaged to arrive in pristine condition. Standard shipping takes 3-5 business days across India.</p>
+                        </div>
+                        <div>
+                          <h4 className="text-ink font-bold mb-1 flex items-center gap-2">
+                            <ShieldCheck size={16} className="text-wine shrink-0" />
+                            <span>Easy Exchange Policy</span>
+                          </h4>
+                          <p className="text-xs sm:text-sm">If your order arrives damaged, contact us within 48 hours for a prompt replacement.</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Reviews Column (Automatically next to details on desktop, and below on mobile scroll) */}
+                  <div className="lg:col-span-6 border-t lg:border-t-0 lg:border-l border-line pt-10 lg:pt-0 lg:pl-10">
+                    <h3 className="font-serif text-2xl text-wine mb-6 flex items-center justify-between">
+                      <span>Customer Reviews</span>
+                      {reviews.length > 0 && (
+                        <span className="text-xs font-sans font-bold bg-wine/10 text-wine px-3 py-1 rounded-full">
+                          {reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}
+                        </span>
+                      )}
+                    </h3>
+                    
+                    <div className="space-y-8">
+                      {/* Review List */}
+                      <div>
+                        {reviews.length === 0 ? (
+                          <p className="text-muted text-sm italic bg-cream/30 p-5 rounded-xl border border-line">
+                            No reviews yet for this gift. Be the first to share your unboxing experience!
+                          </p>
+                        ) : (
+                          <div className="space-y-6 max-h-[480px] overflow-y-auto pr-2 scrollbar-thin">
+                            {reviews.map((review: any) => (
+                              <div key={review.id} className="border-b border-line pb-5">
+                                <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
+                                  <div className="flex items-center gap-1.5 text-gold">
+                                    {[...Array(5)].map((_, i) => (
+                                      <Star key={i} size={14} fill={i < review.rating ? "currentColor" : "none"} strokeWidth={i < review.rating ? 0 : 1} />
+                                    ))}
+                                    {review.title && <span className="font-semibold text-sm text-ink ml-1.5">{review.title}</span>}
+                                  </div>
+                                  {!review.isApproved && (
+                                    <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[10px] font-semibold tracking-wider uppercase bg-amber-50 text-amber-800 border border-amber-300">
+                                      <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse" />
+                                      Pending Approval
+                                    </span>
+                                  )}
+                                </div>
+                                <h4 className="font-bold text-xs text-muted mb-1.5">
+                                  {review.user?.firstName ? `${review.user.firstName} ${review.user.lastName || ''}` : review.firstName ? `${review.firstName} ${review.lastName || ''}` : (review.user?.name || 'Verified Buyer')}
+                                </h4>
+                                <p className="text-sm text-ink/85 leading-relaxed mb-3">{review.comment}</p>
+
+                                {((review.images && review.images.length > 0) || (review.videos && review.videos.length > 0)) && (
+                                  <div className="flex gap-2 flex-wrap mt-2">
+                                    {review.images?.map((imgUrl: string, idx: number) => (
+                                      <a key={`img-${idx}`} href={imgUrl} target="_blank" rel="noreferrer" className="w-14 h-14 rounded border border-line overflow-hidden hover:opacity-90 transition-opacity">
+                                        <img src={imgUrl} alt={`Customer photo ${idx + 1}`} className="w-full h-full object-cover" />
+                                      </a>
+                                    ))}
+                                    {review.videos?.map((vidUrl: string, idx: number) => (
+                                      <div key={`vid-${idx}`} className="w-20 h-14 rounded border border-line overflow-hidden bg-black relative">
+                                        <video src={vidUrl} controls className="w-full h-full object-cover" />
+                                      </div>
+                                    ))}
+                                  </div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Write a Review Form */}
+                      <div className="bg-ivory p-6 sm:p-7 border border-line rounded-2xl shadow-xs">
+                        <h4 className="font-serif text-lg text-wine mb-4">Write a Review</h4>
+                        {reviewSuccess ? (
+                          <div className="bg-cream/50 p-5 text-center border border-line rounded-xl">
+                            <p className="text-wine font-medium text-sm">{reviewSuccess}</p>
+                          </div>
+                        ) : (
+                          <form onSubmit={submitReview} className="space-y-4">
+                            <div>
+                              <label className="block text-[10px] uppercase tracking-widest text-muted mb-1.5 font-medium">Rating</label>
+                              <div className="flex gap-1.5">
+                                {[1, 2, 3, 4, 5].map((star) => (
+                                  <button
+                                    key={star}
+                                    type="button"
+                                    onClick={() => setReviewForm(prev => ({ ...prev, rating: star }))}
+                                    className={`${star <= reviewForm.rating ? "text-amber-400" : "text-gray-300"} hover:scale-110 transition-transform`}
+                                  >
+                                    <Star size={22} fill="currentColor" strokeWidth={0} />
+                                  </button>
+                                ))}
+                              </div>
+                            </div>
+
+                            <div>
+                              <label className="block text-[10px] uppercase tracking-widest text-muted mb-1 font-medium">Your Review</label>
+                              <textarea 
+                                required
+                                value={reviewForm.comment}
+                                onChange={(e) => setReviewForm(prev => ({ ...prev, comment: e.target.value }))}
+                                className="w-full bg-white border border-line p-3 rounded-lg outline-none focus:border-wine text-xs sm:text-sm text-ink resize-none h-24"
+                                placeholder="Share your gifting experience..."
+                              />
+                            </div>
+
+                            <div>
+                              <div className="flex justify-between items-center mb-1">
+                                <label className="block text-[10px] uppercase tracking-widest text-muted font-medium">
+                                  Attach Media
+                                </label>
+                                <span className="text-[10px] text-muted">Max 6</span>
+                              </div>
+                              
+                              <label className={`border border-dashed border-line hover:border-wine bg-white/70 p-2.5 rounded-lg flex items-center justify-center gap-2 cursor-pointer transition-colors ${uploadingReviewMedia ? 'opacity-60 pointer-events-none' : ''}`}>
+                                <input
+                                  type="file"
+                                  accept="image/*,video/*"
+                                  multiple
+                                  onChange={handleReviewFileChange}
+                                  className="hidden"
+                                  disabled={uploadingReviewMedia}
+                                />
+                                {uploadingReviewMedia ? (
+                                  <div className="flex items-center gap-2 text-wine text-xs font-semibold py-0.5">
+                                    <Loader2 size={14} className="animate-spin" />
+                                    <span>Uploading media...</span>
+                                  </div>
+                                ) : (
+                                  <>
+                                    <Camera size={14} className="text-wine" />
+                                    <VideoIcon size={14} className="text-wine" />
+                                    <span className="text-xs text-ink/80 font-medium">Add photos or videos</span>
+                                  </>
+                                )}
+                              </label>
+
+                              {(reviewForm.images.length > 0 || reviewForm.videos.length > 0) && (
+                                <div className="flex gap-2 flex-wrap mt-2">
+                                  {reviewForm.images.map((url, i) => (
+                                    <div key={`img-${i}`} className="relative w-10 h-10 rounded border border-line overflow-hidden group">
+                                      <img src={url} alt={`Preview ${i + 1}`} className="w-full h-full object-cover" />
+                                      <button
+                                        type="button"
+                                        onClick={() => removeReviewMedia("image", i)}
+                                        className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center"
+                                      >
+                                        <CloseIcon size={8} />
+                                      </button>
+                                    </div>
+                                  ))}
+                                  {reviewForm.videos.map((url, i) => (
+                                    <div key={`vid-${i}`} className="relative w-14 h-10 rounded border border-line overflow-hidden bg-black flex items-center justify-center group">
+                                      <video src={url} className="w-full h-full object-cover opacity-80" />
+                                      <span className="absolute text-white pointer-events-none"><VideoIcon size={10} /></span>
+                                      <button
+                                        type="button"
+                                        onClick={() => removeReviewMedia("video", i)}
+                                        className="absolute top-0.5 right-0.5 w-3.5 h-3.5 bg-black/70 hover:bg-red-600 text-white rounded-full flex items-center justify-center"
+                                      >
+                                        <CloseIcon size={8} />
+                                      </button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+
+                            <button 
+                              type="submit"
+                              disabled={submittingReview || uploadingReviewMedia}
+                              className="bg-wine text-white w-full py-2.5 text-xs font-bold tracking-widest uppercase hover:bg-wine-dark rounded-xl transition-colors disabled:opacity-70 flex items-center justify-center gap-2"
+                            >
+                              {submittingReview ? (
+                                <>
+                                  <Loader2 size={14} className="animate-spin" />
+                                  <span>Submitting...</span>
+                                </>
+                              ) : "Submit Review"}
+                            </button>
+                          </form>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             )}
             
@@ -873,7 +1082,6 @@ export default function ProductClient({
                           </div>
                         </div>
 
-
                         <div>
                           <label className="block text-[10px] uppercase tracking-widest text-muted mb-1.5 font-medium">Your Review</label>
                           <textarea 
@@ -933,7 +1141,7 @@ export default function ProductClient({
                                 </div>
                               ))}
                               {reviewForm.videos.map((url, i) => (
-                                <div key={`vid-${i}`} className="relative w-16 h-12 rounded border border-line overflow-hidden bg-black flex items-center justify-center group">
+                                <div key={`vid-${i}`} className="relative w-16 h-12 rounded border border-line overflow-hidden bg-black relative flex items-center justify-center group">
                                   <video src={url} className="w-full h-full object-cover opacity-80" />
                                   <span className="absolute text-white pointer-events-none"><VideoIcon size={12} /></span>
                                   <button

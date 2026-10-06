@@ -1,6 +1,6 @@
 {
-  "name": "MyWebSite",
-  "short_name": "MySite",
+  "name": "Mora Moments",
+  "short_name": "Mora",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
