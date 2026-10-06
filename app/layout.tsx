@@ -63,6 +63,8 @@ async function fetchPages() {
   }
 }
 
+import PageLoader from "./components/PageLoader";
+
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -76,6 +78,7 @@ export default async function RootLayout({
       <body
         className="antialiased selection:bg-wine selection:text-white flex flex-col min-h-screen font-sans"
       >
+        <PageLoader />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
