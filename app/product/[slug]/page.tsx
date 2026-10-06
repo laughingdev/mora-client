@@ -18,7 +18,7 @@ export default async function ProductOldRouteRedirect({
   });
 
   try {
-    const res = await fetch(`${API_BASE}/products/slug/${slug}`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/products/slug/${slug}`, { next: { revalidate: 60 } });
     if (res.ok) {
       const json = await res.json();
       if (json.data) {

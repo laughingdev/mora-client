@@ -40,7 +40,7 @@ async function fetchMenProducts(searchParams: any) {
     if (!params.has('limit')) params.append('limit', '24');
 
     const res = await fetch(`${API_BASE}/products?${params.toString()}`, { 
-      cache: 'no-store' 
+      next: { revalidate: 15 } 
     });
     
     if (!res.ok) return { products: [], meta: null };

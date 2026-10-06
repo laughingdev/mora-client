@@ -18,7 +18,7 @@ const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v
 
 async function fetchProductBySlug(slug: string) {
   try {
-    const res = await fetch(`${API_BASE}/products/slug/${slug}`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/products/slug/${slug}`, { next: { revalidate: 15 } });
     if (!res.ok) return null;
     const json = await res.json();
     return json.data || null;
@@ -53,7 +53,7 @@ async function fetchProductsForCategory(categorySlug: string, searchParams: any 
     }
     if (!params.has('limit')) params.append('limit', '24');
 
-    const res = await fetch(`${API_BASE}/products?${params.toString()}`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/products?${params.toString()}`, { next: { revalidate: 15 } });
     if (!res.ok) return { products: [], meta: null };
     const json = await res.json();
     return {
@@ -89,7 +89,7 @@ async function fetchAllEvents() {
 
 async function fetchSimilarProducts(productId: string) {
   try {
-    const res = await fetch(`${API_BASE}/products/${productId}/similar`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/products/${productId}/similar`, { next: { revalidate: 15 } });
     if (!res.ok) return [];
     const json = await res.json();
     return Array.isArray(json.data) ? json.data : [];
@@ -100,7 +100,7 @@ async function fetchSimilarProducts(productId: string) {
 
 async function fetchReviews(productId: string) {
   try {
-    const res = await fetch(`${API_BASE}/products/${productId}/reviews`, { cache: 'no-store' });
+    const res = await fetch(`${API_BASE}/products/${productId}/reviews`, { next: { revalidate: 15 } });
     if (!res.ok) return [];
     const json = await res.json();
     return Array.isArray(json.data) 
