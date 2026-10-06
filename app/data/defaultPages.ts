@@ -213,7 +213,17 @@ export const DEFAULT_PAGES_MAP: Record<string, PageRecord> = {
       <strong>Response Time:</strong> Within 2 to 4 business hours</p>
 
       <h2>Corporate & Bespoke Gifting</h2>
-      <p>Planning festive hampers, employee appreciation bundles, or client gifting? Visit our <a href="/corporate">Corporate Gifting Desk</a> or email <a href="mailto:corporate@moramoments.in">corporate@moramoments.in</a> for custom branding, bulk pricing, and dedicated relationship management.</p>
+      <p>Planning festive hampers, employee appreciation bundles, or client gifting? Visit our <a href="/shop/corporate">Corporate Gifting Desk</a> or email <a href="mailto:corporate@moramoments.in">corporate@moramoments.in</a> for custom branding, bulk pricing, and dedicated relationship management.</p>
+    `
+  },
+  "affiliate-program": {
+    title: "Affiliate & Creator Program",
+    slug: "affiliate-program",
+    metaTitle: "Affiliate & Creator Program | Mora Moments",
+    metaDescription: "Partner with Mora Moments. Share luxury gift hampers and handcrafted surprises with your community and earn attractive commissions.",
+    metaKeywords: "affiliate program, creator network, mora moments affiliate, gift affiliate, influencer partner",
+    content: `
+      <p class="lead">Join the Mora Moments Affiliate & Creator Community. Share handcrafted luxury hampers, romantic keepsakes, and personalized gifting experiences with your audience and earn handsome commissions on every referral.</p>
     `
   }
 };
