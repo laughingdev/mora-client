@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Search, Home, ShoppingBag, Gift, Truck, HelpCircle, ArrowLeft } from "lucide-react";
+import { Search, Home, ShoppingBag, Gift, Truck, HelpCircle, Sparkles, BookOpen } from "lucide-react";
 
 export default function NotFound() {
   const router = useRouter();
@@ -18,17 +18,29 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-[85vh] bg-[#fffdfa] flex items-center justify-center py-16 px-6 md:px-12 relative overflow-hidden">
-      {/* Decorative background glow accents */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-wine/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-10 right-10 w-72 h-72 bg-[#dfb18e]/10 rounded-full blur-2xl pointer-events-none" />
+    <div className="min-h-[88vh] bg-gradient-to-b from-[#fdfbf7] via-[#faf4ee] to-[#f7eee6] flex items-center justify-center py-20 px-6 md:px-12 relative overflow-hidden">
+      {/* GIGANTIC 404 WATERMARK TEXT BEHIND LOTTIE ANIMATION */}
+      <div 
+        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-serif text-[16rem] sm:text-[24rem] md:text-[32rem] font-black text-wine/10 leading-none select-none pointer-events-none tracking-tighter z-0"
+        aria-hidden="true"
+      >
+        404
+      </div>
 
+      {/* Decorative ambient background glows */}
+      <div className="absolute top-10 left-10 w-96 h-96 bg-wine/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-10 right-10 w-96 h-96 bg-[#dfb18e]/20 rounded-full blur-3xl pointer-events-none" />
+
+      {/* Main Foreground Container */}
       <div className="container mx-auto max-w-3xl text-center relative z-10">
-        {/* Lottie Animation Container */}
-        <div className="relative w-64 h-64 sm:w-80 sm:h-80 mx-auto mb-6 flex items-center justify-center bg-cream/30 border border-line/60 rounded-3xl p-4 shadow-sm backdrop-blur-xs">
-          <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-wine text-white text-[10px] font-bold tracking-[0.2em] uppercase px-3 py-1 rounded-full shadow-xs">
-            404 Error
+        
+        {/* Large Lottie Animation Card Overlaying the 404 watermark */}
+        <div className="relative w-72 h-72 sm:w-96 sm:h-96 mx-auto mb-8 flex items-center justify-center bg-white/75 border border-wine/15 rounded-3xl p-6 shadow-[0_16px_40px_rgba(103,74,79,0.08)] backdrop-blur-md transform transition-transform hover:scale-[1.02]">
+          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-wine text-white text-[11px] font-bold tracking-[0.25em] uppercase px-4 py-1.2 rounded-full shadow-sm flex items-center gap-1.5">
+            <Sparkles size={12} className="text-[#dfb18e]" />
+            <span>Page Not Found</span>
           </div>
+
           <DotLottieReact
             src="/Lurking_Cat.lottie"
             loop
@@ -37,79 +49,87 @@ export default function NotFound() {
           />
         </div>
 
-        {/* Headlines */}
+        {/* Headline & Description */}
         <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl text-ink font-normal mb-3 leading-tight">
-          Curious Cat Got <em className="text-wine font-medium not-italic">Lost</em>
+          Lost in the <em className="text-wine font-medium not-italic">Gift Studio</em>
         </h1>
         <p className="text-muted text-sm sm:text-base font-light max-w-lg mx-auto mb-8 leading-relaxed">
-          The page you are looking for might have been moved, renamed, or is taking a quick catnap in our gifting studio.
+          Looks like our curious cat wandered off. The page you are looking for doesn't exist, was moved, or is taking a quick nap.
         </p>
 
-        {/* Quick Search Box */}
-        <form onSubmit={handleSearchSubmit} className="max-w-md mx-auto mb-10 relative">
-          <div className="flex items-center border border-line bg-white rounded-full p-1.5 shadow-xs focus-within:border-wine transition-all">
-            <Search size={18} className="text-muted ml-3 shrink-0" />
+        {/* Clean Interactive Search Bar */}
+        <form onSubmit={handleSearchSubmit} className="max-w-lg mx-auto mb-10">
+          <div className="flex items-center border border-line bg-white/90 rounded-full p-1.5 shadow-sm focus-within:border-wine focus-within:ring-2 focus-within:ring-wine/20 transition-all">
+            <Search size={18} className="text-muted ml-3.5 shrink-0" />
             <input
               type="text"
               placeholder="Search gifts, hampers, or occasions..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-transparent px-3 py-1.5 text-xs sm:text-sm outline-none text-ink placeholder:text-muted/60"
+              className="w-full bg-transparent px-3 py-2 text-xs sm:text-sm outline-none text-ink placeholder:text-muted/60"
             />
             <button
               type="submit"
-              className="bg-wine text-white text-xs font-semibold px-5 py-2.5 rounded-full hover:bg-wine/90 transition-colors shrink-0 shadow-xs"
+              className="bg-wine text-white text-xs font-semibold uppercase tracking-wider px-6 py-2.5 rounded-full hover:bg-wine-dark transition-colors shrink-0 shadow-xs"
             >
               Search
             </button>
           </div>
         </form>
 
-        {/* CTA Buttons */}
+        {/* Primary Action Buttons */}
         <div className="flex flex-wrap items-center justify-center gap-4 mb-14">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full hover:bg-wine-dark transition-all shadow-sm transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-wine text-white text-xs sm:text-sm font-semibold uppercase tracking-wider px-7 py-3.5 rounded-full hover:bg-wine-dark transition-all shadow-md transform hover:-translate-y-0.5"
           >
             <Home size={16} />
-            <span>Return Home</span>
+            <span>Return to Home</span>
           </Link>
           <Link
             href="/shop"
-            className="inline-flex items-center gap-2 bg-white text-ink border border-line text-xs sm:text-sm font-semibold uppercase tracking-wider px-6 py-3.5 rounded-full hover:text-wine hover:border-wine transition-all shadow-2xs transform hover:-translate-y-0.5"
+            className="inline-flex items-center gap-2 bg-white text-ink border border-line text-xs sm:text-sm font-semibold uppercase tracking-wider px-7 py-3.5 rounded-full hover:text-wine hover:border-wine transition-all shadow-xs transform hover:-translate-y-0.5"
           >
             <ShoppingBag size={16} />
-            <span>Explore Shop</span>
+            <span>Explore Collection</span>
           </Link>
         </div>
 
-        {/* Quick Link Shortcuts */}
-        <div className="pt-8 border-t border-line/60 max-w-xl mx-auto">
-          <p className="text-[11px] uppercase tracking-widest font-bold text-muted mb-4">Or try one of these popular destinations:</p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-xs">
+        {/* Quick Navigation Shortcuts */}
+        <div className="pt-8 border-t border-line/70 max-w-2xl mx-auto">
+          <p className="text-[11px] uppercase tracking-widest font-bold text-muted mb-4">Or discover these popular destinations:</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
             <Link
               href="/builder"
-              className="flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-line/80 hover:border-wine hover:text-wine transition-colors text-ink/80 shadow-2xs"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-white/80 border border-line/80 hover:border-wine hover:text-wine transition-all text-ink/80 shadow-2xs hover:shadow-xs"
             >
-              <Gift size={14} className="text-wine" />
+              <Gift size={15} className="text-wine shrink-0" />
               <span>Custom Gift Box</span>
             </Link>
             <Link
               href="/track-order"
-              className="flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-line/80 hover:border-wine hover:text-wine transition-colors text-ink/80 shadow-2xs"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-white/80 border border-line/80 hover:border-wine hover:text-wine transition-all text-ink/80 shadow-2xs hover:shadow-xs"
             >
-              <Truck size={14} className="text-wine" />
+              <Truck size={15} className="text-wine shrink-0" />
               <span>Track Order</span>
             </Link>
             <Link
-              href="/contact-us"
-              className="flex items-center justify-center gap-2 p-3 rounded-xl bg-white border border-line/80 hover:border-wine hover:text-wine transition-colors text-ink/80 shadow-2xs col-span-2 sm:col-span-1"
+              href="/blog"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-white/80 border border-line/80 hover:border-wine hover:text-wine transition-all text-ink/80 shadow-2xs hover:shadow-xs"
             >
-              <HelpCircle size={14} className="text-wine" />
+              <BookOpen size={15} className="text-wine shrink-0" />
+              <span>Gift Stories</span>
+            </Link>
+            <Link
+              href="/contact-us"
+              className="flex items-center justify-center gap-2 p-3.5 rounded-xl bg-white/80 border border-line/80 hover:border-wine hover:text-wine transition-all text-ink/80 shadow-2xs hover:shadow-xs"
+            >
+              <HelpCircle size={15} className="text-wine shrink-0" />
               <span>Help & Support</span>
             </Link>
           </div>
         </div>
+
       </div>
     </div>
   );
