@@ -91,13 +91,15 @@ export default function AffiliateProgramPage() {
           </div>
 
           {/* Form Frame */}
-          <div className="p-4 md:p-8 bg-[#faf6f2]">
-            <div className="w-full bg-white rounded-xl border border-line overflow-hidden min-h-[650px] shadow-xs">
+          <div className="p-2 md:p-6 bg-[#faf6f2]">
+            <div className="w-full bg-white rounded-xl border border-line shadow-xs">
               <iframe
                 src={GOOGLE_FORM_URL}
                 width="100%"
-                height="750"
-                className="w-full border-none min-h-[700px]"
+                height="1650"
+                scrolling="no"
+                style={{ width: "100%", height: "1650px", border: 0 }}
+                className="w-full border-none"
                 title="Mora Moments Affiliate Application Form"
               >
                 Loading affiliate application form...
