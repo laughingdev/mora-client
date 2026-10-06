@@ -34,9 +34,9 @@ export default function NotFound() {
       {/* Main Foreground Container */}
       <div className="container mx-auto max-w-3xl text-center relative z-10">
         
-        {/* Large Lottie Animation Card Overlaying the 404 watermark */}
-        <div className="relative w-72 h-72 sm:w-96 sm:h-96 mx-auto mb-8 flex items-center justify-center bg-white/75 border border-wine/15 rounded-3xl p-6 shadow-[0_16px_40px_rgba(103,74,79,0.08)] backdrop-blur-md transform transition-transform hover:scale-[1.02]">
-          <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-wine text-white text-[11px] font-bold tracking-[0.25em] uppercase px-4 py-1.2 rounded-full shadow-sm flex items-center gap-1.5">
+        {/* Transparent Lottie Animation Container Overlaying the 404 watermark */}
+        <div className="relative w-72 h-72 sm:w-96 sm:h-96 mx-auto mb-4 flex items-center justify-center bg-transparent">
+          <div className="absolute -top-2 left-1/2 -translate-x-1/2 bg-wine text-white text-[11px] font-bold tracking-[0.25em] uppercase px-4 py-1.5 rounded-full shadow-sm flex items-center gap-1.5 z-20 pointer-events-auto">
             <Sparkles size={12} className="text-[#dfb18e]" />
             <span>Page Not Found</span>
           </div>
@@ -45,7 +45,7 @@ export default function NotFound() {
             src="/Lurking_Cat.lottie"
             loop
             autoplay
-            className="w-full h-full object-contain"
+            className="w-full h-full object-contain pointer-events-auto"
           />
         </div>
 
